@@ -5,10 +5,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Main extends JavaPlugin {
-    List<Player>
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    List<Player>players = new ArrayList<>();
     private Main instance;
     public String prf= "§eQuake";
     @Override
