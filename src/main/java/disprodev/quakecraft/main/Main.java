@@ -2,9 +2,13 @@ package disprodev.quakecraft.main;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
+
 public final class Main extends JavaPlugin {
+    List<Player>
     private Main instance;
     public String prf= "§eQuake";
     @Override
