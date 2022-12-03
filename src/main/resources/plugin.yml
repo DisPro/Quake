@@ -1,0 +1,4 @@
+name: Main
+version: '${project.version}'
+main: disprodev.quakecraft.main.Main
+authors: [ DisPro ]
