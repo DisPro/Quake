@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Main extends JavaPlugin {
+    private List<Player> startingPlayer = new ArrayList<>();
     public List<Player> getPlayers() {
         return players;
     }
@@ -17,8 +18,12 @@ public final class Main extends JavaPlugin {
         this.players = players;
     }
 
+    public List<Player> getStartingPlayer() {
+        return startingPlayer;
+    }
+
     List<Player>players = new ArrayList<>();
-    private Main instance;
+    private static Main instance;
     public String prf= "§eQuake";
     @Override
     public void onEnable() {
@@ -27,11 +32,16 @@ public final class Main extends JavaPlugin {
     }
     private void msgconsole(String s,String n) {
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&5=========="+ n+"§5=========="));
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCeci est le plugin de DisPro"));
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCeci est le plugin de DisPro et EVHILIKO972"));
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "§e"));
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "§eEtat du plugin :" + s));
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&5=========="+ n+"§5=========="));
     }
+
+    public static Main getInstance() {
+        return instance;
+    }
+
     @Override
     public void onDisable() {
         msgconsole("§cOFF",prf);
