@@ -1,5 +1,6 @@
 package disprodev.quakecraft.main;
 
+import disprodev.quakecraft.main.Listeners.InteractListener;
 import disprodev.quakecraft.main.ScordBoard.FastBoard;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -31,12 +32,13 @@ public final class Main extends JavaPlugin implements Listener {
     }
     private final Map<UUID, FastBoard> boards = new HashMap<>();
     List<Player>players = new ArrayList<>();
-    private Main instance;
+    private static Main instance;
     public String prf= "§6Quake";
     @Override
     public void onEnable() {
         instance = this;
         msgconsole("§aOn",prf);
+        setup();
         getServer().getPluginManager().registerEvents(this, this);
 
         getServer().getScheduler().runTaskTimer(this, () -> {
@@ -66,6 +68,16 @@ public final class Main extends JavaPlugin implements Listener {
         board.updateTitle(prf);
 
         this.boards.put(player.getUniqueId(), board);
+    }
+
+    public static Main getInstance() {
+        return instance;
+    }
+
+    private void setup() {
+
+        getServer().getPluginManager().registerEvents(new InteractListener(), this);
+
     }
 
     @EventHandler

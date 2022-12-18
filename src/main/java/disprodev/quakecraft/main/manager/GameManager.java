@@ -1,8 +1,14 @@
 package disprodev.quakecraft.main.manager;
 
 import disprodev.quakecraft.main.Main;
+import disprodev.quakecraft.main.utils.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameManager {
@@ -19,22 +25,16 @@ public class GameManager {
 
     public void loadGame() {
 
-        Main.getInstance().getStartingPlayer().add(player);
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), new BukkitRunnable() {
-            @Override
-            public void run() {
+        Main.getInstance().getPlayers().add(player);
 
-                timer--;
-                if (timer == 0) {
+        player.getInventory().setItem(0, new ItemBuilder(Material.IRON_HOE)
+                .setName("§e§lPistolet")
+                .toItemStack());
+        player.updateInventory();
 
-                    this.cancel();
-                    timer = 3;
-                    Main.getInstance().getStartingPlayer().remove(player);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 2, 255, true, false));
 
-                }
-
-            }
-        }, 0L);
+        player.playSound(player.getLocation(), Sound.PORTAL_TRAVEL, 10000, 1f);
 
     }
 
