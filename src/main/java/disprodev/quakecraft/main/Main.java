@@ -76,8 +76,7 @@ public final class Main extends JavaPlugin implements Listener {
 
     private void setup() {
 
-        getServer().getPluginManager().registerEvents(new InteractListener(), this);
-        getServer().getPluginManager().registerEvents(new CancelListeners(), this);
+        getServer().getPluginManager().registerEvents(new InteractListener(this), this);
 
     }
 

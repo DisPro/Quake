@@ -2,6 +2,7 @@ package disprodev.quakecraft.main.Listeners;
 
 import disprodev.quakecraft.main.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -11,16 +12,39 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import xyz.xenondevs.particle.ParticleBuilder;
+import xyz.xenondevs.particle.ParticleEffect;
+import xyz.xenondevs.particle.data.color.NoteColor;
+import xyz.xenondevs.particle.data.color.RegularColor;
 
 public class InteractListener implements Listener {
+    private Main main;
+
+    public InteractListener(Main main) {
+        this.main = main;
+    }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
+    public void onInteract(PlayerInteractEvent e) {
 
+        if (!(e.getAction() == Action.RIGHT_CLICK_AIR)) return;
+        if (!(e.getItem().getType() == Material.IRON_HOE)) return;
+        Snowball s = e.getPlayer().launchProjectile(Snowball.class);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(main, new Runnable() {
+            public void run() {
+                if (!s.isDead()) {
+                    ParticleEffect.FLAME.display(s.getLocation());
+                }
+            }
+        }, 1, 200);
+
+    }
+}
+/*
         Player player = event.getPlayer();
-
         switch (event.getAction()) {
 
             case LEFT_CLICK_AIR:
@@ -34,14 +58,13 @@ public class InteractListener implements Listener {
 
                     //todo: donner un effet d'invi à la snowball
 
-                    Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new BukkitRunnable() {
+                    Bukkit.getScheduler().scheduleSyncRepeatingTask((main.getInstance()), new BukkitRunnable() {
                         @Override
                         public void run() {
 
                             if (!snowball.isDead()) {
 
-                                Entity particle = snowball.getWorld().spawn(snowball.getLocation(), EntityType.);
-
+                                ParticleEffect.FLAME.display(snowball.getLocation());
 
                             }
 
@@ -52,6 +75,6 @@ public class InteractListener implements Listener {
 
         }
 
-    }
+    }*/
 
-}
+

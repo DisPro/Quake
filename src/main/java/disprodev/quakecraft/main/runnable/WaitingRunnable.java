@@ -1,14 +1,14 @@
 package disprodev.quakecraft.main.runnable;
 
 import disprodev.quakecraft.main.Main;
-import disprodev.quakecraft.main.manager.GameManager;
+//import disprodev.quakecraft.main.manager.GameManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class WaitingRunnable extends BukkitRunnable {
-
+public class WaitingRunnable {
+/*
     public static int timer = 30;
 
     @Override
@@ -38,5 +38,5 @@ public class WaitingRunnable extends BukkitRunnable {
         }
 
     }
-
+*/
 }

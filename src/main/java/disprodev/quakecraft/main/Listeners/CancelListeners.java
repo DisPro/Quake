@@ -1,4 +1,4 @@
-package disprodev.quakecraft.main;
+package disprodev.quakecraft.main.Listeners;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
