@@ -19,10 +19,13 @@ public class OnJoin implements Listener {
     }
     @EventHandler
     public void OnJoin(PlayerJoinEvent e) {
+
         ParticleEffect.FLAME.display(e.getPlayer().getLocation());
 
         Bukkit.broadcastMessage("test");
         Player p = e.getPlayer();
+        Main.getInstance().getKill().put(p, 1000);
+
         if (!main.getPlayers().contains(p)){
             main.getPlayers().add(p);
         }

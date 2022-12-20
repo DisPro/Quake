@@ -1,5 +1,6 @@
 package disprodev.quakecraft.main;
 
+import disprodev.quakecraft.main.Listeners.CancelListeners;
 import disprodev.quakecraft.main.Listeners.InteractListener;
 import disprodev.quakecraft.main.ScordBoard.FastBoard;
 import net.md_5.bungee.api.ChatColor;
@@ -11,7 +12,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public final class Main extends JavaPlugin implements Listener {
     public void setStat(GStats stat) {
@@ -32,6 +35,20 @@ public final class Main extends JavaPlugin implements Listener {
     }
     private final Map<UUID, FastBoard> boards = new HashMap<>();
     List<Player>players = new ArrayList<>();
+
+
+    public Map<Player, Integer> getKill() {
+        return Kill;
+    }
+
+    Map<Player,Integer>Kill = new HashMap();
+
+    public List<Color> getParticleColor() {
+        return ParticleColor;
+    }
+
+    List<Color>ParticleColor = new ArrayList<>();
+
     private static Main instance;
     public String prf= "§6Quake";
     @Override
@@ -39,6 +56,7 @@ public final class Main extends JavaPlugin implements Listener {
         instance = this;
         msgconsole("§aOn",prf);
         setup();
+        setupcolor();
         getServer().getPluginManager().registerEvents(this, this);
 
         getServer().getScheduler().runTaskTimer(this, () -> {
@@ -46,6 +64,28 @@ public final class Main extends JavaPlugin implements Listener {
                 updateBoard(board);
             }
         }, 0, 20);
+    }
+
+    private void setupcolor() {
+        getParticleColor().add(Color.RED);
+        getParticleColor().add(Color.BLACK);
+        getParticleColor().add(Color.WHITE);
+        getParticleColor().add(Color.YELLOW);
+        getParticleColor().add(Color.ORANGE);
+        getParticleColor().add(Color.green);
+        getParticleColor().add(Color.DARK_GRAY);
+        getParticleColor().add(Color.GRAY);
+        getParticleColor().add(Color.pink);
+        getParticleColor().add(Color.magenta);
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "§a Couleur généré"));
+
+
+
+
+
+
+
+
     }
 
     private void msgconsole(String s,String n) {
@@ -77,6 +117,7 @@ public final class Main extends JavaPlugin implements Listener {
     private void setup() {
 
         getServer().getPluginManager().registerEvents(new InteractListener(this), this);
+        getServer().getPluginManager().registerEvents(new CancelListeners(this), this);
 
     }
 
